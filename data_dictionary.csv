@@ -1,0 +1,31 @@
+Column,Description
+Learner_Id_Number_LIN,Unique Learner Identification Number (3-letter state prefix + 8 digits). Primary key under Nigeria's 2026 Federal LIN policy. NOT a model feature.
+First_Name,Learner's given name. Authentic Nigerian names (Yoruba/Igbo/Hausa/other); gender-matched. Administrative field — NOT a model feature.
+Last_Name,Learner's surname. Authentic Nigerian surnames. Administrative field — NOT a model feature.
+Academic_Year,"Nigerian academic session, e.g. '2024/2025'."
+Gender,Learner's gender: Male or Female.
+Age,Learner's age in years at time of record.
+Education_Level,"Stage of basic education: Primary, Junior Secondary, or Senior Secondary."
+Class_Grade,"Specific class label: Primary 1–6, JSS 1–3, or SSS 1–3."
+School_Type,Public (government-funded) or Private school.
+Household_Income_Level,"Socioeconomic tier: Low, Medium, or High."
+Parent_Guardian_Education,"Highest educational attainment of parent/guardian: No Formal Education, Primary, Secondary, or Tertiary."
+Distance_to_School_km,One-way home-to-school distance in kilometres.
+Attendance_Rate,"Proportion of school days attended in the current term (0.20–0.97). Generated via a Beta distribution stratified by income, distance, and bullying."
+Has_Textbooks,Whether the learner has the required textbooks: Yes or No.
+Bullying_Flag,Whether the learner has been identified as a bullying victim: Yes or No.
+Term_Grade_Prev1,Overall term grade (0–100) for two sessions ago (oldest of the three past terms).
+Term_Grade_Prev2,Overall term grade (0–100) for the previous-previous term.
+Term_Grade_Prev3,Overall term grade (0–100) for the immediately preceding term (most recent past).
+Term_Stage,"Stage within the current term at which this record was captured. 1 = Pre-CA1 (no assessments yet); 2 = Post-CA1 (first CA completed); 3 = Post-MidTerm (mid-term test completed); 4 = Post-Exam (all assessments completed). Distribution: Stage 1=15%, Stage 2=25%, Stage 3=30%, Stage 4=30%."
+CA1_Available,"Flag: 1 if the First Continuous Assessment has been sat, 0 otherwise. A score of 0 with CA1_Available=0 means 'not yet taken', not 'zero marks'."
+CA1_Score_Current,"First Continuous Assessment score, current term (out of 20). 0 when CA1_Available = 0."
+MidTerm_Available,"Flag: 1 if the Mid-Term Test has been sat, 0 otherwise."
+MidTerm_Score_Current,"Mid-term test score, current term (out of 20). 0 when MidTerm_Available = 0."
+Exam_Available,"Flag: 1 if the End-of-Term Examination has been sat, 0 otherwise."
+Exam_Score_Current,"End-of-term examination score, current term (out of 60). 0 when Exam_Available = 0."
+Current_Score_So_Far,Sum of all completed assessment scores in the current term (0–100). 0 at Stage 1; grows as more assessments are completed.
+Max_Possible_So_Far,Maximum marks achievable given the current Term_Stage: 0 at Stage 1 / 20 at Stage 2 / 40 at Stage 3 / 100 at Stage 4.
+Performance_Pct_So_Far,Current_Score_So_Far / Max_Possible_So_Far. Stage-normalised performance: directly comparable across all stages. NaN at Stage 1 (no current-term data exists). KEY feature for the early warning model.
+Subjects_Failed,Number of subjects in which the learner scored below the pass mark (0–9). -1 at Stages 1–3 (sentinel value meaning 'not yet determinable'). Only populated at Stage 4 when all scores are available. The ML pipeline must handle -1 appropriately (e.g. encode as missing).
+Dropout_Risk,"Binary target variable: 1 = At Risk of Dropping Out, 0 = Not at Risk. Computed via a weighted logistic risk model incorporating all available signals at the record's Term_Stage."
