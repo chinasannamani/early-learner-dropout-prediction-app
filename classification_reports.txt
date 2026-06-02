@@ -1,0 +1,40 @@
+NUTDTS 803 – ML Model Classification Reports (v4 Dataset)
+Nigerian University of Technology and Management
+============================================================
+
+────────────────────────────────────────
+Logistic Regression
+────────────────────────────────────────
+              precision    recall  f1-score   support
+
+ Not at Risk       0.85      0.66      0.74       725
+     At Risk       0.43      0.69      0.53       275
+
+    accuracy                           0.67      1000
+   macro avg       0.64      0.67      0.63      1000
+weighted avg       0.73      0.67      0.68      1000
+
+────────────────────────────────────────
+Random Forest
+────────────────────────────────────────
+              precision    recall  f1-score   support
+
+ Not at Risk       0.81      0.85      0.83       725
+     At Risk       0.54      0.48      0.51       275
+
+    accuracy                           0.74      1000
+   macro avg       0.68      0.66      0.67      1000
+weighted avg       0.74      0.74      0.74      1000
+
+────────────────────────────────────────
+XGBoost
+────────────────────────────────────────
+              precision    recall  f1-score   support
+
+ Not at Risk       0.83      0.76      0.79       725
+     At Risk       0.47      0.58      0.52       275
+
+    accuracy                           0.71      1000
+   macro avg       0.65      0.67      0.66      1000
+weighted avg       0.73      0.71      0.72      1000
+
